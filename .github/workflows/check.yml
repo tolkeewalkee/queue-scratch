@@ -1,0 +1,9 @@
+name: check
+on: [pull_request, merge_group]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - if: github.event_name == 'merge_group'
+        run: sleep ${{ vars.QUEUE_SLEEP }} && test ! -e proofs/eject-me
